@@ -11,23 +11,39 @@ public class TaskAdditional2 {
         for (int i = 0; i < n; i++) {
             a[i] = console.nextInt();
         }
-        //Создание, заполнение и сортировка массива
+        //Создание, заполнение массива (считаем сколько отрицательных чисел)
+        int negativeNumberCount = 0;
         int[] b = new int[n];
         for ( int i = 0; i < n; i++) {
+            if (a[i] < 0) {
+                negativeNumberCount++;
+            }
             b[i] = (int) Math.pow(a[i], 2);
         }
 
-        int j;
-        for (int i = 1; i < n; i++) {
-            int temp = b[i];
-            for (j = i; j > 0 && temp < b[j - 1]; j--) {
-                b[j] = b[j - 1];
+        //Сортировка массива
+        int[] c = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (negativeNumberCount > 0) {
+                int j = negativeNumberCount - 1; //индекс левого числа
+                int k = 1; //счетчик положения правого числа
+                while (j >= 0 && j + k < n) {
+                    if (b[j] >= b[j + k]) {
+                        c[i] = b[j + k];
+                        k++;
+                    } else {
+                        c[i] = b[j];
+                        j--;
+                        k++;
+                    }
+                    i++;
+                    negativeNumberCount--; //считаем сколько квадратов отрицательных чисел осталось сравнить
+                }
             }
-            b[j] = temp;
+            c[i] = b[i];
         }
-
         //Печать нового массива
-        for (int e: b){
+        for (int e: c){
             System.out.print(e + " ");
         }
     }
