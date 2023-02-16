@@ -1,4 +1,4 @@
-package Homework_3_Part_3;
+package Homework_3_Part_1;
 
 import java.util.Arrays;
 
@@ -6,6 +6,13 @@ public class Student {
     private String name;
     private String surname;
     private int[] grades;
+
+    public Student() {};
+    public Student(String name, String surname, int[] grades) {
+        this.name = name;
+        this.surname = surname;
+        this.grades = grades;
+    }
 
     public String getName() { return name; }
 

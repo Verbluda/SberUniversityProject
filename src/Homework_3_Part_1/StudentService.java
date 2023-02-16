@@ -1,19 +1,15 @@
-package Homework_3_Part_3;
+package Homework_3_Part_1;
 
 public class StudentService {
     private StudentService() {
     }
 
     public static Student bestStudent(Student[] students) {
-        double[] gradesPointAvarage = new double[students.length];
-        for (int i = 0; i < gradesPointAvarage.length; i++) {
-            gradesPointAvarage[i] = students[i].getGradePointAverage();
-        }
         int indexBestStudent = 0;
-        double maxGPA = gradesPointAvarage[indexBestStudent];
-        for (int i = 1; i < gradesPointAvarage.length; i++) {
-            if (maxGPA < gradesPointAvarage[i]) {
-                maxGPA = gradesPointAvarage[i];
+        double maxGPA = students[indexBestStudent].getGradePointAverage();
+        for (int i = 1; i < students.length; i++) {
+            if (maxGPA < students[i].getGradePointAverage()) {
+                maxGPA = students[i].getGradePointAverage();
                 indexBestStudent = i;
             }
         }
