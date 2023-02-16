@@ -1,4 +1,4 @@
-package Homework_3_Part_3;
+package Homework_3_Part_1;
 
 public class TimeUnit {
     private int hours;

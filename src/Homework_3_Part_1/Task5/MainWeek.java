@@ -1,4 +1,4 @@
-package Homework_3_Part_3.Task5;
+package Homework_3_Part_1.Task5;
 
 public class MainWeek {
     public static void main(String[] args) {

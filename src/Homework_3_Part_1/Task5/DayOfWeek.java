@@ -1,4 +1,4 @@
-package Homework_3_Part_3.Task5;
+package Homework_3_Part_1.Task5;
 
 public enum DayOfWeek {
     MONDAY((byte)1, "Monday"),
