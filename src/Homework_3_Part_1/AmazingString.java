@@ -1,4 +1,4 @@
-package Homework_3_Part_3;
+package Homework_3_Part_1;
 
 public class AmazingString {
     private char[] s;
@@ -30,6 +30,9 @@ public class AmazingString {
         System.out.println();
     }
     public boolean isSubstring(char[] subs) {
+        if (subs.length == 0) {
+            return true;
+        }
         int j = 0;
         for (int i = 0; i < length; i++) {
             if (s[i] == subs[j]) {
@@ -39,12 +42,12 @@ public class AmazingString {
                 }
             }
         }
-        if (j == subs.length - 1) {
-            return true;
-        }
-        return false;
+        return j == subs.length - 1;
     }
     public boolean isSubstring(String subs) {
+        if (subs.length() == 0) {
+            return true;
+        }
         int j = 0;
         for (int i = 0; i < length; i++) {
             if (s[i] == subs.charAt(j)) {
@@ -54,10 +57,7 @@ public class AmazingString {
                 }
             }
         }
-        if (j == subs.length() - 1) {
-            return true;
-        }
-        return false;
+        return j == subs.length() - 1;
     }
     public void trim() {
         int j = 0;
