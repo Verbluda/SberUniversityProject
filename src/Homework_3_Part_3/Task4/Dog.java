@@ -1,0 +1,47 @@
+package Homework_3_Part_3.Task4;
+
+import java.util.ArrayList;
+
+public class Dog {
+    private String nameOfDog;
+    private Participant nameOfParticipant;
+    private ArrayList<Integer> scores;
+    private double averageScore;
+
+    public Dog(String nameOfDog, Participant nameOfParticipant) {
+        this.nameOfDog = nameOfDog;
+        this.nameOfParticipant = nameOfParticipant;
+    }
+
+    public String getNameOfDog() {
+        return nameOfDog;
+    }
+
+    public void setNameOfDog(String nameOfDog) {
+        this.nameOfDog = nameOfDog;
+    }
+
+    public Participant getNameOfParticipant() {
+        return nameOfParticipant;
+    }
+
+    public void setNameOfParticipant(Participant nameOfParticipant) {
+        this.nameOfParticipant = nameOfParticipant;
+    }
+
+    public ArrayList<Integer> getScores() {
+        return scores;
+    }
+
+    public void setScores(int score) {
+        this.scores.add(score);
+    }
+
+    public void averageScore() {
+        int sum = 0;
+        for (int i = 0; i < scores.size(); i++) {
+            sum += scores[i];
+        }
+        averageScore = (double) sum / scores.size();
+    }
+}
