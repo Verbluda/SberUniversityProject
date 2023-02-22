@@ -1,6 +1,9 @@
 package Homework_3_Part_3.Task4;
 
+import Homework_3_Part_2.Book;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Dog {
     private String nameOfDog;
@@ -37,11 +40,20 @@ public class Dog {
         this.scores.add(score);
     }
 
+    public double getAverageScore() {
+        return averageScore;
+    }
+
     public void averageScore() {
         int sum = 0;
         for (int i = 0; i < scores.size(); i++) {
-            sum += scores[i];
+            sum += scores.get(i);
         }
         averageScore = (double) sum / scores.size();
+    }
+
+    @Override
+    public String toString() {
+        return nameOfParticipant + " : " + nameOfDog + ", " + averageScore + "." ;
     }
 }
