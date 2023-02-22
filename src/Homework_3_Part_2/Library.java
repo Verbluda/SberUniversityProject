@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Library {
     ArrayList<Book> books = new ArrayList<>();
+    private int visitorCount;
     public void addBook(Book book) {
         if (!books.contains(book)) {
             books.add(book);
@@ -42,6 +43,45 @@ public class Library {
             } else {
                 System.out.println("Книгу взял на время один из читатей, удалить её не получилось");
             }
+        }
+    }
+
+    public void borrowTheBookByTitle(String title, Visitor visitor) {
+        Book book = this.getBookByTitle(title);
+        if (books.contains(book) && !book.isBorrowed() && !visitor.equals(new Visitor()) && !visitor.isHoldingTheBook()) {
+            if (visitor.getId() == null) {
+                visitorCount++;
+                visitor.setId(visitorCount);
+            }
+            book.setBorrowed(true);
+            book.setBookHolder(visitor);
+            visitor.setHoldingTheBook(true);
+            visitor.setBook(book);
+        } else if (!books.contains(book)) {
+            System.out.println("Такой книги пока нет в библиотеке, мы не можем выдать её читателю на руки.");
+        } else if (visitor.equals(new Visitor())) {
+            System.out.println("Вы ещё не записались в нашу библиотеку, оформите читательский билет, чтобы брать книги");
+        } else if (books.contains(book) && book.isBorrowed()) {
+            System.out.println("Книга сейчас у другого читателя библиотеке, вы сможете одолжить её позже, когда он её вернет");
+        } else if (!visitor.equals(new Visitor())) {
+            System.out.println("Чтобы взять новую книгу, верните ту, что одалживали в прошлый раз");
+        }
+    }
+
+    public void returnTheBook(String title, Visitor visitor, int rating) {
+        Book book = this.getBookByTitle(title);
+        if (book.getBookHolder().equals(visitor)) {
+            if (rating > 0 && rating < 11) {
+                book.setRating(rating);
+                book.setBorrowed(false);
+                book.setBookHolder(new Visitor());
+                visitor.setHoldingTheBook(false);
+                visitor.setBook(new Book());
+            } else {
+                System.out.println("Книгу можно оценить по 10-бальной шкале, введите свою оценку корректно");
+            }
+        } else {
+            System.out.println("Эту книгу брал другой читатель, он должен вернуть её лично, вы не можете вернуть её вместо него");
         }
     }
 

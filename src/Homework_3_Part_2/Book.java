@@ -1,11 +1,14 @@
 package Homework_3_Part_2;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Book {
     private String author;
     private String title;
     private boolean isBorrowed;
+    private Visitor bookHolder;
+    private ArrayList<Integer> rating = new ArrayList<>();
 
     public Book() {}
     public Book(String author, String title) {
@@ -38,6 +41,27 @@ public class Book {
         isBorrowed = borrowed;
     }
 
+    public Visitor getBookHolder() {
+        return bookHolder;
+    }
+
+    public void setBookHolder(Visitor bookHolder) {
+        this.bookHolder = bookHolder;
+    }
+
+    public double getRating() {
+        int sum = 0;
+        int i = 0;
+        for (; i < rating.size() - 1; i++) {
+            sum += rating.get(i);
+        }
+        return ((double) sum / i);
+    }
+
+    public void setRating(int rating) {
+        this.rating.add(rating);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +77,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return (author != null && title != null) ? author + " - " + title : "В библиотеке нет такой книги";
+        return (author != null && title != null) ? author + " - " + title : "Нет такой книги";
     }
 }
