@@ -29,5 +29,5 @@ public class Order extends GenericModel {
     @Column(name = "rent_period", nullable = false)
     private Integer rentPeriod;
     @Column(name = "purchase", nullable = false)
-    private boolean purchase;
+    private Boolean purchase;
 }
