@@ -1,5 +1,6 @@
 package com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Director extends GenericModel {
     @Column(name = "position", nullable = false)
     private String position;
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "films_directors",
             joinColumns = @JoinColumn(name = "director_id"),
             foreignKey = @ForeignKey(name = "FK_DIRECTORS_FILMS"),

@@ -16,34 +16,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.webjars.NotFoundException;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/directors")
-@Tag(name = "Режисеры", description = "Контроллер для работы с режиссерами фильмов из фильмотеки")
-public class DirectorController extends GenericController<Director> {
+@RequestMapping("/films")
+@Tag(name = "Фильмы", description = "Контроллер для работы с фильмами из фильмотеки")
+public class FilmController extends GenericController<Film> {
+
     private final FilmRepository filmRepository;
     private final DirectorRepository directorRepository;
 
-    public DirectorController(GenericRepository<Director> genericRepository,
-                              FilmRepository filmRepository,
-                              DirectorRepository directorRepository) {
+    public FilmController(GenericRepository<Film> genericRepository,
+                          FilmRepository filmRepository,
+                          DirectorRepository directorRepository) {
         super(genericRepository);
         this.filmRepository = filmRepository;
         this.directorRepository = directorRepository;
     }
 
-    @Operation(description = "Добавить фильм к режиссеру")
-    @RequestMapping(value = "/addFilm",
+    @Operation(description = "Добавить режиссера к фильму")
+    @RequestMapping(value = "/addDirector",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Director> addFilm(@RequestParam(value = "filmId") Long filmId,
+    public ResponseEntity<Film> addDirector(@RequestParam(value = "filmId") Long filmId,
                                             @RequestParam(value = "directorId") Long directorId) {
         Film film = filmRepository.findById(filmId)
                 .orElseThrow(() -> new NotFoundException("фильм не найден"));
         Director director = directorRepository.findById(directorId)
                 .orElseThrow(() -> new NotFoundException("режиссер не найден"));
-        director.getFilms().add(film);
-        return ResponseEntity.status(HttpStatus.OK).body(directorRepository.save(director));
+        film.getDirectors().add(director);
+        return ResponseEntity.status(HttpStatus.OK).body(filmRepository.save(film));
     }
 }
