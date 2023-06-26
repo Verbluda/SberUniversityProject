@@ -1,5 +1,6 @@
 package com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,11 +20,13 @@ public class Order extends GenericModel {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false,
             foreignKey = @ForeignKey(name = "FK_ORDERS_USERS"))
-    private User userId;
+    @JsonIgnore
+    private User user;
     @ManyToOne
     @JoinColumn(name = "film_id", nullable = false,
             foreignKey = @ForeignKey(name = "FK_ORDERS_FILMS"))
-    private Film filmId;
+    @JsonIgnore
+    private Film film;
     @Column(name = "rent_date", nullable = false)
     private LocalDateTime rentDate;
     @Column(name = "rent_period", nullable = false)

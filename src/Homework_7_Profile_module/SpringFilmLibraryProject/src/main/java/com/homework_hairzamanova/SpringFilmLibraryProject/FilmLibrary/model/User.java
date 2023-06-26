@@ -1,5 +1,6 @@
 package com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "users",
@@ -42,5 +44,7 @@ public class User extends GenericModel {
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false,
     foreignKey = @ForeignKey(name = "FK_USERS_ROLES"))
-    private Role roleId;
+    private Role role;
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 }
