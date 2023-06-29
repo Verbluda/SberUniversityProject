@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Фильмы фильмотеки</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Все фильмы фильмотеки</h1>
+    <div class="row">
+        <div class="col">
+            <li sec:authorize="isAuthenticated() && (hasRole('ADMIN') || hasRole('SELLER'))" class="nav-link">
+            <a href="films/add"
+               class="btn btn-secondary"
+               role="button"
+               style="float: right"
+               aria-disabled="true">Добавить фильм</a>
+            </li>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Название</th>
+            <th scope="col">Жанр</th>
+            <th scope="col">Страна производства</th>
+            <th scope="col">Дата премьеры</th>
+            <!--            <th scope="col">Режиссер(ы)</th>-->
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="film : ${films}">
+            <td th:text="${film.getTitle()}">
+                <!--                <a th:href="'/films/' + ${film.getId()}" ></a>-->
+            </td>
+            <td th:text="${film.getGenre().getGenreTextDisplay()}"></td>
+            <td th:text="${film.getCountry()}"></td>
+            <td th:text="${film.getPremierYear()}"></td>
+            <!--            <td>-->
+            <!--                <ul>-->
+            <!--                    <li th:each="director : ${film.getDirectors()}" th:text="${director.getDirectorFio()}"></li>-->
+            <!--                </ul>-->
+            <!--            </td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

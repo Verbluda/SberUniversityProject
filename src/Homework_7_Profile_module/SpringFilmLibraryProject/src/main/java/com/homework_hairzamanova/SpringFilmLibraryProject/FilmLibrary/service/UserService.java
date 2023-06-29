@@ -3,20 +3,26 @@ package com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.service;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto.RoleDTO;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto.UserDTO;
 
-import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.mapper.UserMapper;
-import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.Order;
+import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.mapper.GenericMapper;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.User;
-import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.repository.OrderRepository;
+import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.repository.GenericRepository;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Service
-public class UserService extends GenericService<User, UserDTO> {
-    public UserService(UserRepository userRepository,
-                       UserMapper userMapper) {
-        super(userRepository, userMapper);
+public class UserService
+        extends GenericService<User, UserDTO> {
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserService(GenericRepository<User> repository,
+                       GenericMapper<User, UserDTO> mapper,
+                       BCryptPasswordEncoder bCryptPasswordEncoder) {
+        super(repository, mapper);
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -24,6 +30,22 @@ public class UserService extends GenericService<User, UserDTO> {
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setId(1L);
         newObject.setRole(roleDTO);
-        return mapper.toDTO((repository.save(mapper.toEntity(newObject))));
+        newObject.setPassword(bCryptPasswordEncoder.encode(newObject.getPassword()));
+        newObject.setCreatedWhen(LocalDateTime.now());
+        return mapper.toDTO(repository.save(mapper.toEntity(newObject)));
     }
+
+    public UserDTO getUserByLogin(final String login) {
+        return mapper.toDTO(((UserRepository) repository).findUserByLogin(login));
+    }
+
+    public UserDTO getUserByEmail(final String email) {
+        return mapper.toDTO(((UserRepository) repository).findUserByEmail(email));
+    }
+
+    public boolean checkPassword(String password, UserDetails foundUser) {
+        return bCryptPasswordEncoder.matches(password, foundUser.getPassword());
+    }
+
 }
+

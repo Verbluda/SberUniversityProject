@@ -4,7 +4,6 @@ import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto.UserDT
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.GenericModel;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.User;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.repository.OrderRepository;
-import jakarta.annotation.PostConstruct;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

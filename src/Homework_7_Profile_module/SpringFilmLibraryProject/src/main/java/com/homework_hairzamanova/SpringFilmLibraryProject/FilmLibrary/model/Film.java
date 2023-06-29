@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -20,7 +20,7 @@ public class Film extends GenericModel {
     @Column(name = "title", nullable = false)
     private String title;
     @Column(name = "premier_year")
-    private LocalDateTime premierYear;
+    private LocalDate premierYear;
     @Column(name = "country")
     private String country;
     @Column(name = "genre", nullable = false)

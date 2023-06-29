@@ -1,13 +1,12 @@
 package com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto;
 
-import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.Director;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.Genre;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @ToString
@@ -16,7 +15,7 @@ import java.util.List;
 @Setter
 public class FilmDTO extends GenericDTO {
     private String title;
-    private LocalDateTime premierYear;
+    private LocalDate premierYear;
     private String country;
     private Genre genre;
     List<Long> directorsIds;

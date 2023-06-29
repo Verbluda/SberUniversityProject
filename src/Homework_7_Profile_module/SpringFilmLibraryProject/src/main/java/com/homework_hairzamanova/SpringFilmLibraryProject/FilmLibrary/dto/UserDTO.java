@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class UserDTO extends GenericDTO {
     private String firstName;
     private String lastName;
     private String middleName;
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
     private String phone;
     private String address;
     private String email;
