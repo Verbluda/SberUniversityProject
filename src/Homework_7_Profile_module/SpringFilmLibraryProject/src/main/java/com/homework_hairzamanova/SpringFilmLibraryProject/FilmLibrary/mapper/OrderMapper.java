@@ -4,6 +4,7 @@ import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto.OrderD
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.Order;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.repository.FilmRepository;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.repository.UserRepository;
+import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.service.FilmService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import org.webjars.NotFoundException;
@@ -15,13 +16,16 @@ import java.util.List;
 public class OrderMapper extends GenericMapper<Order, OrderDTO> {
     private final FilmRepository filmRepository;
     private final UserRepository userRepository;
+    private final FilmService filmService;
 
     public OrderMapper(ModelMapper modelMapper,
                        FilmRepository filmRepository,
-                       UserRepository userRepository) {
+                       UserRepository userRepository,
+                       FilmService filmService) {
         super(Order.class, OrderDTO.class, modelMapper);
         this.filmRepository = filmRepository;
         this.userRepository = userRepository;
+        this.filmService = filmService;
     }
 
 

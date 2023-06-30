@@ -1,4 +1,4 @@
-package com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.controller;
+package com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.controller.rest;
 
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto.GenericDTO;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.GenericModel;

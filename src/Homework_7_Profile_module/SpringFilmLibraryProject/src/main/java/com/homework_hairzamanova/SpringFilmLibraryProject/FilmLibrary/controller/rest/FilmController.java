@@ -1,20 +1,20 @@
-package com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.controller;
+package com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.controller.rest;
 
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto.FilmDTO;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.Film;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.service.FilmService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/films")
+@SecurityRequirement(name = "Bearer Authentication")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Tag(name = "Фильмы", description = "Контроллер для работы с фильмами из фильмотеки")
 public class FilmController extends GenericController<Film, FilmDTO> {
 
