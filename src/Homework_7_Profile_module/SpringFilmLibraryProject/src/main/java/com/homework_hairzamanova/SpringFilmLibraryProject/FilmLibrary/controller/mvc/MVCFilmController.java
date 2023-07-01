@@ -5,10 +5,7 @@ import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.service.Fi
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,6 +36,13 @@ public class MVCFilmController {
         log.info(newFilm.toString());
         filmService.create(newFilm);
         return "redirect:/films";
+    }
+
+    @GetMapping("/{id}")
+    public String getOne(@PathVariable Long id,
+                         Model model) {
+        model.addAttribute("film", filmService.getOne(id));
+        return "films/viewFilm";
     }
 
 }

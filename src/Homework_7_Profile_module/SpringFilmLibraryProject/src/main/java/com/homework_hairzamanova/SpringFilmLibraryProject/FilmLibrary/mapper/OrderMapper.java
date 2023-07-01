@@ -34,6 +34,7 @@ public class OrderMapper extends GenericMapper<Order, OrderDTO> {
         super.modelMapper.createTypeMap(Order.class, OrderDTO.class)
                 .addMappings(mapping -> mapping.skip(OrderDTO::setUserId))
                 .addMappings(mapping -> mapping.skip(OrderDTO::setFilmId))
+                .addMappings(mapping -> mapping.skip(OrderDTO::setFilmDTO))
                 .setPostConverter(toDTOConverter());
         super.modelMapper.createTypeMap(OrderDTO.class, Order.class)
                 .addMappings(mapping -> mapping.skip(Order::setUser))
@@ -53,6 +54,7 @@ public class OrderMapper extends GenericMapper<Order, OrderDTO> {
     protected void mapSpecificFields(Order source, OrderDTO destination) {
         destination.setFilmId(source.getFilm().getId());
         destination.setUserId(source.getUser().getId());
+        destination.setFilmDTO(filmService.getOne(source.getFilm().getId()));
     }
 
     @Override

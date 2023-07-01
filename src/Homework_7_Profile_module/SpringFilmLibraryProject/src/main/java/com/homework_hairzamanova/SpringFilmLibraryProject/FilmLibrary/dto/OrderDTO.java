@@ -16,6 +16,6 @@ public class OrderDTO extends GenericDTO {
     private Long filmId;
     private LocalDateTime rentDate;
     private Integer rentPeriod;
-    private Boolean returned;
     private Boolean purchase;
+    private FilmDTO filmDTO;
 }

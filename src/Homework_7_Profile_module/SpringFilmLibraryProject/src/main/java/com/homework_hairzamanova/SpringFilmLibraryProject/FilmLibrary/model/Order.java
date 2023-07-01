@@ -31,8 +31,6 @@ public class Order extends GenericModel {
     private LocalDateTime rentDate;
     @Column(name = "rent_period", nullable = false)
     private Integer rentPeriod;
-    @Column(name = "returned", nullable = false)
-    private Boolean returned;
     @Column(name = "purchase", nullable = false)
     private Boolean purchase;
 }

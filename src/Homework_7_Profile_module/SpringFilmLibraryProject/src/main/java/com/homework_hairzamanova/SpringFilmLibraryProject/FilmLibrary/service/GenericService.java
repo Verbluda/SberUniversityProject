@@ -4,6 +4,9 @@ import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto.Generi
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.mapper.GenericMapper;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.GenericModel;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.repository.GenericRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -22,7 +25,14 @@ public abstract class GenericService<E extends GenericModel, D extends GenericDT
         return mapper.toDTOs((repository.findAll()));
      }
 
-     public D getOne(final Long id) {
+    public Page<D> listAll(Pageable pageable) {
+        Page<E> objects = repository.findAll(pageable);
+        List<D> result = mapper.toDTOs(objects.getContent());
+        return new PageImpl<>(result, pageable, objects.getTotalElements());
+    }
+
+
+    public D getOne(final Long id) {
         return mapper.toDTO(repository.findById(id).orElseThrow(() -> new NotFoundException("Данных по заданному id: " + id + " не найдено")));
      }
 

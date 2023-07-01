@@ -1,8 +1,6 @@
 package com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.service;
-
-import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto.FilmDTO;
+;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto.OrderDTO;
-import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.dto.UserDTO;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.mapper.OrderMapper;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.Order;
 import com.homework_hairzamanova.SpringFilmLibraryProject.FilmLibrary.model.User;
@@ -19,7 +17,6 @@ import java.util.List;
 
 @Service
 public class OrderService extends GenericService<Order, OrderDTO> {
-
     private final FilmService filmService;
     private final UserRepository userRepository;
     protected OrderService(OrderRepository orderRepository,
@@ -40,11 +37,11 @@ public class OrderService extends GenericService<Order, OrderDTO> {
     public OrderDTO rentFilm(final OrderDTO orderDTO) {
         long rentPeriod = orderDTO.getRentPeriod() != null ? orderDTO.getRentPeriod() : 14L;
         orderDTO.setRentDate(LocalDateTime.now());
-        orderDTO.setReturned(false);
-        orderDTO.setPurchase(false);
+        orderDTO.setPurchase(true);
         orderDTO.setRentPeriod((int) rentPeriod);
         return mapper.toDTO(repository.save(mapper.toEntity(orderDTO)));
     }
+
 
     public Page<OrderDTO> listUserRentFilms(final Long id,
                                             final Pageable pageRequest) {
