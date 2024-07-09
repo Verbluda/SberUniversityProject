@@ -1,1 +1,1 @@
-[![KnlnKS's LeetCode stats](https://leetcode-stats-six.vercel.app/?username=Verbluda)](https://github.com/KnlnKS/leetcode-stats)
+[![Leetcode Stats](https://leetcard.jacoblin.cool/Verbluda)](https://leetcode.com/Verbluda)
